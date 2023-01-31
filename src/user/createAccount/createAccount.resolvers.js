@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
-import client from "../client";
+import client from "../../client";
 
 export default {
   Mutation: {
-    createAccount: async (_, { username, email, avatar, password }) => {
+    createAccount: async (_, { username, email, password }) => {
       try {
         // check usename or email are already on DB
         const existUser = await client.user.findFirst({
@@ -18,6 +18,7 @@ export default {
             ],
           },
         });
+
         if (existUser) {
           throw new Error("Username or email already exists");
         }
