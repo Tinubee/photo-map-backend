@@ -1,5 +1,6 @@
-import jwt from "jsonwebtoken";
+import * as jwt from "jsonwebtoken";
 import client from "../client";
+import { Resolver } from "../types";
 
 export const getUser = async (token) => {
   try {
@@ -18,7 +19,7 @@ export const getUser = async (token) => {
   }
 };
 
-export function protextedResolvers(ourResolver) {
+export function protextedResolvers(ourResolver: Resolver) {
   return function (root, args, context, info) {
     if (!context.loggedInUser) {
       const query = info.operation.operation == "query";

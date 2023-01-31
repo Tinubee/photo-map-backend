@@ -1,11 +1,11 @@
-import client from "../../client";
 import bcrypt from "bcrypt";
+import { Resolvers } from "../../types";
 import { protextedResolvers } from "../users.utils";
 
 const resolverFn = async (
   _,
   { username, email, password: newPassword },
-  { loggedInUser }
+  { loggedInUser, client }
 ) => {
   let _hashPassword = null;
   if (newPassword) {
@@ -30,8 +30,10 @@ const resolverFn = async (
   }
 };
 
-export default {
+const resolvers: Resolvers = {
   Mutation: {
     editProfile: protextedResolvers(resolverFn),
   },
 };
+
+export default resolvers;

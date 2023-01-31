@@ -1,18 +1,19 @@
 require("dotenv").config();
 
 import { ApolloServer } from "apollo-server";
-import { typeDefs, resolvers } from "./schema";
+import client from "./client";
+import schema from "./schema";
 import { getUser } from "./user/users.utils";
 
 const PORT = process.env.PORT;
 
 const server = new ApolloServer({
-  resolvers,
-  typeDefs,
+  schema,
   context: async (ctx) => {
     if (ctx.req) {
       return {
         loggedInUser: await getUser(ctx.req.headers.token),
+        client,
       };
     } else {
       const {
@@ -22,17 +23,6 @@ const server = new ApolloServer({
         loggedInUser: context.loggedInUser,
       };
     }
-  },
-  subscriptions: {
-    onConnect: async ({ token }) => {
-      if (!token) {
-        throw new Error("You can't listen without a token");
-      }
-      const loggedInUser = await getUser(token);
-      return {
-        loggedInUser,
-      };
-    },
   },
 });
 
