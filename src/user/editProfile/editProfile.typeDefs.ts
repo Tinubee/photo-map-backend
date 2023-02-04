@@ -1,4 +1,4 @@
-import { gql } from "apollo-server";
+import { gql } from "apollo-server-express";
 
 export default gql`
   type Mutation {
@@ -7,6 +7,7 @@ export default gql`
       email: String
       password: String
       avatar: String
+      bio: String
     ): MutationResponse!
   }
 `;

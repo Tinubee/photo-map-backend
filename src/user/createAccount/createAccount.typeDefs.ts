@@ -1,12 +1,13 @@
-import { gql } from "apollo-server";
+import { gql } from "apollo-server-express";
 
 export default gql`
   type Mutation {
     createAccount(
       username: String!
       email: String!
-      avatar: String
       password: String!
+      socialLogin: Boolean!
+      avatar: String
     ): MutationResponse!
   }
 `;

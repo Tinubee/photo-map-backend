@@ -3,9 +3,9 @@ import { Resolvers } from "../../types";
 import { protextedResolvers } from "../users.utils";
 
 const resolverFn = async (
-  _,
-  { username, email, password: newPassword },
-  { loggedInUser, client }
+  _: any,
+  { username, email, password: newPassword, bio }: any,
+  { loggedInUser, client }: any
 ) => {
   let _hashPassword = null;
   if (newPassword) {
