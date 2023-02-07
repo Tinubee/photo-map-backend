@@ -1,8 +1,7 @@
 import bcrypt from "bcrypt";
+import { uploadToS3 } from "../../shared/shared.utils";
 import { Resolvers } from "../../types";
 import { protextedResolvers } from "../users.utils";
-import { GraphQLUpload } from "graphql-upload";
-import fs, { access } from "fs";
 
 const resolverFn = async (
   _: any,
@@ -15,17 +14,9 @@ const resolverFn = async (
   }
 
   let avatarUrl = null;
+  console.log(avatar);
   if (avatar) {
-    const { filename, createReadStream } = await avatar.file;
-
-    const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
-    const readStream = createReadStream();
-    console.log(readStream);
-    const writeStream = fs.createWriteStream(
-      process.cwd() + "/uploads/" + newFilename
-    );
-    readStream.pipe(writeStream);
-    avatarUrl = `http://localhost:4000/static/${newFilename}`;
+    avatarUrl = await uploadToS3(avatar.file, loggedInUser.id, "avatars");
   }
   const updatedUser = await client.user.update({
     where: {
