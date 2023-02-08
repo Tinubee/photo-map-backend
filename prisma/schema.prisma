@@ -11,24 +11,25 @@ datasource db {
 }
 
 model User {
-  id          Int       @id @unique @default(autoincrement())
-  username    String    @unique
-  email       String    @unique
+  id          Int      @id @unique @default(autoincrement())
+  username    String   @unique
+  email       String   @unique
   password    String
   bio         String?
   avatar      String?
   photos      Photo[]
   Like        Like[]
-  Comment     Comment[]
-  socialLogin Boolean   @default(false)
-  createAt    DateTime  @default(now())
-  updateAt    DateTime  @updatedAt
+  socialLogin Boolean  @default(false)
+  createAt    DateTime @default(now())
+  updateAt    DateTime @updatedAt
 }
 
 model Photo {
-  id          Int       @id @default(autoincrement())
-  user        User      @relation(fields: [userId], references: [id])
+  id          Int      @id @default(autoincrement())
+  user        User     @relation(fields: [userId], references: [id])
   userId      Int
+  path        String
+  transform   String?
   file        String
   region      String
   description String?
@@ -36,9 +37,8 @@ model Photo {
   latitude    Float?
   longitude   Float?
   likes       Like[]
-  comments    Comment[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Like {
@@ -51,16 +51,4 @@ model Like {
   updatedAt DateTime @updatedAt
 
   @@unique([photoId, userId])
-}
-
-model Comment {
-  id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  photo     Photo    @relation(fields: [photoId], references: [id], onDelete: Cascade)
-  payload   String
-  isMine    Boolean
-  userId    Int
-  photoId   Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }

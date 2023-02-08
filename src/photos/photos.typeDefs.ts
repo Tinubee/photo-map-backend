@@ -5,13 +5,14 @@ export default gql`
     id: Int!
     user: User!
     userId: Int!
+    path: String!
+    transform: String
     file: String!
     region: String!
     description: String
     address: String
     latitude: String
     longitude: String
-    isMine: Boolean!
     likes: [Like]
     createdAt: String!
     updatedAt: String!
