@@ -3,14 +3,12 @@ import { protextedResolvers } from "../../user/users.utils";
 
 const resolvers: Resolvers = {
   Query: {
-    seePhoto: async (_, { id }, { loggedInUser, client }) => {
-      console.log(id);
+    seePhoto: (_, { id }, { client }) =>
       client.photo.findUnique({
         where: {
           id,
         },
-      });
-    },
+      }),
   },
 };
 

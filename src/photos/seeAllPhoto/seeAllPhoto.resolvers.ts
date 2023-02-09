@@ -3,12 +3,12 @@ import { protextedResolvers } from "../../user/users.utils";
 
 const resolvers: Resolvers = {
   Query: {
-    seeAllPhoto: protextedResolvers(async (_, { __ }, { client }) => {
-      console.log(client.photo);
+    seeAllPhoto: (_, __, { client }) =>
       client.photo.findMany({
-        orderBy: { createdAt: "desc" },
-      });
-    }),
+        orderBy: {
+          description: "desc",
+        },
+      }),
   },
 };
 
