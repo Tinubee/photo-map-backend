@@ -6,7 +6,7 @@ const resolvers: Resolvers = {
     seeAllPhoto: (_, __, { client }) =>
       client.photo.findMany({
         orderBy: {
-          description: "desc",
+          createdAt: "desc",
         },
       }),
   },
