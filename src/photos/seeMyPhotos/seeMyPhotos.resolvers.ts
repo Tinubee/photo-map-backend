@@ -1,13 +1,15 @@
 import { Resolvers } from "../../types";
+import { protextedResolvers } from "../../user/users.utils";
 
 const resolvers: Resolvers = {
   Query: {
-    seeMyPhotos: (_, { userId }, { client }) =>
+    seeMyPhotos: protextedResolvers(async (_, __, { loggedInUser, client }) =>
       client.photo.findMany({
         where: {
-          userId,
+          userId: loggedInUser?.id,
         },
-      }),
+      })
+    ),
   },
 };
 
