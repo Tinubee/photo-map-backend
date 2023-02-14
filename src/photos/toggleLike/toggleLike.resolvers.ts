@@ -9,6 +9,9 @@ export default {
             id,
           },
         });
+
+        console.log(photo);
+
         if (!photo) {
           return {
             ok: false,

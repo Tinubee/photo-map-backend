@@ -13,9 +13,10 @@ export default gql`
     address: String
     latitude: String
     longitude: String
-    likes: [Like]
+    likes: Int!
     createdAt: String!
     updatedAt: String!
+    isLiked: Boolean!
   }
   type Like {
     id: Int!
