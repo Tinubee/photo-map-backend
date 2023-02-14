@@ -10,8 +10,6 @@ export default {
           },
         });
 
-        console.log(photo);
-
         if (!photo) {
           return {
             ok: false,
