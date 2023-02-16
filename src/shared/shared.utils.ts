@@ -16,7 +16,7 @@ export const uploadToS3 = async (
   console.log(filename);
   console.log(createReadStream);
   const readStream = createReadStream();
-  const objectName = `${folderName}/${userId}-${Date.now()}-${filename}`;
+  const objectName = `${folderName}/${userId}/${Date.now()}-${filename}`;
   const { Location } = await new AWS.S3()
     .upload({
       Bucket: "tinubee-photo-map",

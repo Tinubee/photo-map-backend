@@ -1,23 +1,30 @@
 import { Resolvers } from "../../types";
-import { protextedResolvers } from "../../user/users.utils";
 
 const resolvers: Resolvers = {
   Query: {
-    seeUserRegionPhotos: protextedResolvers(
-      async (_, { region, userId }, { client }) =>
-        client.photo.findMany({
-          where: {
-            AND: [
-              {
-                userId,
-              },
-              {
-                region,
-              },
-            ],
-          },
-        })
-    ),
+    seeUserRegionPhotos: async (_, { region, userId }, { client }) =>
+      client.photo.findMany({
+        where: {
+          AND: [
+            {
+              userId,
+            },
+            {
+              OR: [
+                {
+                  region,
+                },
+                {
+                  region: `${region}⭐️`,
+                },
+              ],
+            },
+          ],
+        },
+        orderBy: {
+          id: "desc",
+        },
+      }),
   },
 };
 
