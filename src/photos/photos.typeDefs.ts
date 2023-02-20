@@ -11,8 +11,8 @@ export default gql`
     region: String!
     description: String
     address: String
-    latitude: String
-    longitude: String
+    latitude: Float
+    longitude: Float
     likes: Int!
     createdAt: String!
     updatedAt: String!

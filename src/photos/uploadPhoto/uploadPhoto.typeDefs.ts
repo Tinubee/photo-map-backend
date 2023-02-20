@@ -7,6 +7,9 @@ export default gql`
       path: String!
       transform: String
       region: String!
+      latitude: Float
+      longitude: Float
+      address: String
     ): Photo
   }
   scalar Upload

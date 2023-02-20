@@ -7,11 +7,12 @@ const resolvers: Resolvers = {
     uploadPhoto: protextedResolvers(
       async (
         _,
-        { file, path, transform, region },
+        { file, path, transform, region, latitude, longitude, address },
         { loggedInUser, client }
       ) => {
-        console.log(`File Name : ${file}`);
-        console.log(`Region Name : ${region}`);
+        console.log(`latitude : ${latitude}`);
+        console.log(`longitude : ${longitude}`);
+        console.log(`address : ${address}`);
 
         const fileUrl = await uploadToS3(file.file, loggedInUser?.id, "photos");
 
@@ -21,6 +22,9 @@ const resolvers: Resolvers = {
             path,
             region,
             transform,
+            latitude,
+            longitude,
+            address,
             user: {
               connect: {
                 id: loggedInUser?.id,
