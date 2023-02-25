@@ -18,7 +18,7 @@ model User {
   bio         String?
   avatar      String?
   photos      Photo[]
-  Like        Like[]
+  likes       Like[]
   socialLogin Boolean  @default(false)
   createAt    DateTime @default(now())
   updateAt    DateTime @updatedAt

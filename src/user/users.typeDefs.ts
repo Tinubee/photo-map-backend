@@ -9,6 +9,7 @@ export default gql`
     avatar: String
     socialLogin: Boolean!
     photos: [Photo]
+    likes: [Photo]
     createAt: String!
     updateAt: String!
   }
