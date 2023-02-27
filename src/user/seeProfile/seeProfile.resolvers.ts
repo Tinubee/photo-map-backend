@@ -3,10 +3,10 @@ import { protextedResolvers } from "../users.utils";
 
 const resolvers: Resolvers = {
   Query: {
-    seeProfile: protextedResolvers((_, { username }, { client }) =>
+    seeProfile: protextedResolvers((_, { id }, { client }) =>
       client.user.findUnique({
         where: {
-          username,
+          id,
         },
       })
     ),
